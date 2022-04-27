@@ -9,14 +9,26 @@ public class BaekJoon1300 {
         int N = in.nextInt();
         int K = in.nextInt();
 
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++){
-                list.add(i*j);
+        long lo = 1;
+        long hi = K;
+
+        while(lo < hi) {
+
+            long mid = (lo + hi) / 2;
+            long count = 0;
+
+            for(int i = 1; i <= N; i++) {
+                count += Math.min(mid / i, N);
+            }
+
+            if(K <= count) {
+                hi = mid;
+            }
+            else {
+                lo = mid + 1;
             }
         }
 
-        list.sort(Comparator.naturalOrder());
-        System.out.println(list.get(K+1));
+        System.out.println(lo);
     }
 }
